@@ -7,16 +7,14 @@
  *
  * @format
  */
+import "react-native-gesture-handler";
+import React from 'react';
+import { SafeAreaView } from 'react-native';
+import AppNavigator from './AppNavigator';
 
- import React from 'react';
- import { SafeAreaView, Text } from 'react-native';
- import BootupScreen from './src/pages/BootupScreen';
- 
  const App = () => {
    return (
-     <SafeAreaView>
-        <BootupScreen />
-     </SafeAreaView>
+      <AppNavigator />
    )
  }
  

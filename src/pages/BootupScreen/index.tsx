@@ -1,5 +1,5 @@
 import React from "react";
-import { SafeAreaView, Text, StyleSheet, Dimensions, ScrollView } from "react-native";
+import { SafeAreaView, View, Text, StyleSheet, Dimensions, ScrollView } from "react-native";
 import BrandButton from "../../components/BrandButton";
 import { useTheme } from "../../hooks/useTheme";
 import LogoSVG from "../../SVG/Logo";
@@ -12,15 +12,19 @@ const BootupScreen = () => {
     return (
         <SafeAreaView style={styles.container}> 
             <ScrollView contentContainerStyle={styles.contentContainer}>
-                <LogoSVG width={100} />
-                <Text style={styles.header}>Cleanwalk</Text>
-                <WalkingGirlSVG width={width * 0.95} />
-                <BrandButton style={styles.registerButton} title="Start Walking Today" />
-                <BrandButton 
-                    style={[ styles.loginButton ]} 
-                    title="Restart Trash Walking"
-                    color={palette.milkWhite}
-                />
+                <View style={styles.header}>
+                    <LogoSVG width={100} />
+                    <Text style={styles.headerText}>Cleanwalk</Text>
+                    <WalkingGirlSVG width={width * 0.95} />
+                </View>
+                <View>
+                    <BrandButton style={styles.registerButton} title="Start Walking Today" />
+                    <BrandButton 
+                        style={[ styles.loginButton ]} 
+                        title="Restart Trash Walking"
+                        color={palette.milkWhite}
+                    />
+                </View>
             </ScrollView>
         </SafeAreaView>
     )
@@ -38,9 +42,16 @@ const styles = StyleSheet.create({
         display: 'flex',
         alignItems: "center",
         width,
+        height: height - 125,
         backgroundColor: "#1F1F1F",
+        justifyContent: "space-between",
     },
     header: {
+        display: "flex",
+        justifyContent: 'center',
+        alignItems: "center",
+    },
+    headerText: {
         fontWeight: "700",
         fontSize: 30,
         color: "#fff",
