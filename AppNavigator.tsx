@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { NavigationContainer, DarkTheme } from '@react-navigation/native';
+import { createNativeStackNavigator, } from '@react-navigation/native-stack';
 import BootupScreen from './src/pages/BootupScreen';
 import SignupScreen from './src/pages/SignupScreen';
 import SignupGeolocation from './src/pages/SignupScreen/Geolocation';
@@ -11,13 +11,13 @@ const Stack = createNativeStackNavigator();
 
 const AppNavigator = () => {
   return (
-    <NavigationContainer>
+    <NavigationContainer theme={DarkTheme}>
       <Stack.Navigator initialRouteName='bootup'>
       <Stack.Screen 
               name="home" 
               component={HomeScreen} 
               options={{
-                  headerShown: false,
+                  headerBackVisible: false,
                   gestureEnabled: false
               }}
           />

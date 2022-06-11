@@ -69,7 +69,7 @@ const CreateAccountScreen = ({ route, navigation} : any) => {
                         <WalkingManSVG width={width * 0.65} />
                     </View>
                     <Text style={[ styles.header, { color: "#fff" } ]}>
-                        Mint Account
+                        Create Account
                     </Text>
                     <TextInput 
                         onSubmitEditing={handleCreateAccount}
@@ -82,7 +82,7 @@ const CreateAccountScreen = ({ route, navigation} : any) => {
                         secureTextEntry={true}
                         placeholder="Password"
                     />
-                    <BrandButton onPress={handleCreateAccount} style={{ marginTop: 25 }} title="Mint Wallet" />
+                    <BrandButton onPress={handleCreateAccount} style={{ marginTop: 25 }} title="Create Account" />
                     <View style={styles.orContainer}>
                         <View style={[styles.horizontalLineLeft]}/>
                         <Text style={[styles.or]}>Or</Text>

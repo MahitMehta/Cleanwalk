@@ -8,7 +8,7 @@ import config from './src/config';
 import { IRootReducer } from "./src/store/reducers";
 import { getAccessToken } from "./src/store/selectors/auth.selectors";
 import store, { persistor } from "./src/store";
-import { Dimensions, SafeAreaView, StyleSheet } from "react-native";
+import { Dimensions, SafeAreaView, StatusBar, StyleSheet } from "react-native";
 import { useTheme } from "./src/hooks/useTheme";
 
 const { width, height } = Dimensions.get('window');
@@ -44,6 +44,8 @@ const ApolloClientWrapper: React.FC<ApolloClientWrapperProps> = ({ children }) =
     };
 
    return (
+    <>
+    <StatusBar barStyle={"light-content"} />
     <ReduxProvider store={store}>
       <PersistGate loading={<ReduxBlocker/>} persistor={persistor}>
         <ApolloClientWrapper>
@@ -53,6 +55,7 @@ const ApolloClientWrapper: React.FC<ApolloClientWrapperProps> = ({ children }) =
         </ApolloClientWrapper>
       </PersistGate>
     </ReduxProvider>
+    </>
    )
  }
  

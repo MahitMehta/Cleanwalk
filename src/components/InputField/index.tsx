@@ -22,7 +22,7 @@ const InputField : React.FC<InputFieldProps & TextInputProps> =
             <View style={[ styles.container, { backgroundColor: palette.milkWhite }, style ]}>
                 <TextInput 
                     onBlur={() => Keyboard.dismiss}
-                    placeholderTextColor={Platform.OS === "ios" ?  undefined : palette.darkGrey }
+                    placeholderTextColor={Platform.OS === "ios" ?  "grey" : palette.darkGrey }
                     style={[ styles.input, { color: palette.darkGrey }]}
                     { ...props }
                 />

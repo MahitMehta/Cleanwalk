@@ -1,0 +1,52 @@
+import { faUser } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
+import React, { useMemo } from "react";
+import { StyleSheet, View, Text, Image } from "react-native";
+import { useTheme } from "../../hooks/useTheme";
+
+type AvatarProps = {
+    url?: string | null,
+    headers?: any,
+    size?: number,
+    iconSize?: number,
+}
+
+const Avatar : React.FC<AvatarProps> = ({ url, headers, size=25, iconSize = 15, }) => {
+    return (
+        <View style={[ styles.container, { backgroundColor: "#DEDEDE", width: 25 + size, height: 25 + size }]}>
+            { url && (
+                <Image style={styles.image} source={{
+                    uri: url,
+                    headers: headers || {},
+                    cache: "force-cache",
+                }} />
+            )}
+            <FontAwesomeIcon size={iconSize} color={"rgba(0, 0, 0, 0.15)"} icon={faUser} />
+        </View>
+    );    
+};
+
+const styles = StyleSheet.create({
+    container: {
+        borderRadius: 65,
+        margin: 5,
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        overflow: "hidden",
+    },
+    image: {
+        width: 65,
+        height: 65,
+        position: "absolute",
+        top: 0,
+        zIndex: 1,
+    },
+    name: {
+        color: "#fff",
+        fontSize: 30,
+        fontWeight: "700",
+    }
+});
+
+export default Avatar; 
