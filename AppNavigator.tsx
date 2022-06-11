@@ -5,13 +5,22 @@ import BootupScreen from './src/pages/BootupScreen';
 import SignupScreen from './src/pages/SignupScreen';
 import SignupGeolocation from './src/pages/SignupScreen/Geolocation';
 import LoginScreen from './src/pages/LoginScreen';
+import HomeScreen from './src/pages/homeScreen';
 
 const Stack = createNativeStackNavigator();
 
 const AppNavigator = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
+      <Stack.Navigator initialRouteName='bootup'>
+      <Stack.Screen 
+              name="home" 
+              component={HomeScreen} 
+              options={{
+                  headerShown: false,
+                  gestureEnabled: false
+              }}
+          />
         <Stack.Screen 
             name="bootup" 
             component={BootupScreen} 

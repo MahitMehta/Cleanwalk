@@ -20,6 +20,7 @@ import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { setAggregatedUser } from '../../store/actions/user.actions';
 import WalkingManSVG from "../../SVG/WalkingMan";
+
 const { width, height } = Dimensions.get("screen");
 
 const LoginScreen = ({navigation} : any) => {
@@ -38,7 +39,7 @@ const LoginScreen = ({navigation} : any) => {
     const dispatch = useDispatch();
 
     const handleHome = () => {
-        navigation.navigate("bootup");
+        navigation.navigate("home");
     };
 
     const handleLogin = () => {
