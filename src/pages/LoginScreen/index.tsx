@@ -75,6 +75,7 @@ const LoginScreen = ({navigation} : any) => {
                         onSubmitEditing={handleLogin}
                         onChangeText={updateFormData('email')}
                         placeholder="example@gmail.com"
+                        keyboardType='email-address'
                     />
                     <TextInput 
                         onSubmitEditing={handleLogin}
