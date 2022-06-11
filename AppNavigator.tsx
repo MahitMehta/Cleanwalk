@@ -6,6 +6,7 @@ import SignupScreen from './src/pages/SignupScreen';
 import SignupGeolocation from './src/pages/SignupScreen/Geolocation';
 import LoginScreen from './src/pages/LoginScreen';
 import HomeScreen from './src/pages/homeScreen';
+import PostCreate from './src/pages/PostCreate';
 
 const Stack = createNativeStackNavigator();
 
@@ -13,7 +14,16 @@ const AppNavigator = () => {
   return (
     <NavigationContainer theme={DarkTheme}>
       <Stack.Navigator initialRouteName='bootup'>
-      <Stack.Screen 
+          <Stack.Screen 
+              name="postCreate" 
+              component={PostCreate} 
+              options={{
+                  title: "Create Walk",
+                  headerBackVisible: true,
+                  gestureEnabled: true
+              }}
+          />
+        <Stack.Screen 
               name="home" 
               component={HomeScreen} 
               options={{

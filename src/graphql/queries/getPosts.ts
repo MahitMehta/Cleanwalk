@@ -3,6 +3,7 @@ import { IUser } from '../../store/interfaces/user.interface';
 
 export interface IPost {
     description: string; 
+    createdAt: string; 
     location?: {
         type: string; 
         coordinates: Array<String>
@@ -18,6 +19,7 @@ export const getPostsQuery = () => (
                 location {
                     coordinates
                 },
+                createdAt,
                 user {
                     email
                 }

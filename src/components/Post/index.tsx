@@ -1,6 +1,6 @@
 import { faEllipsis, faHandDots, faHeart, faListDots } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import React from "react";
+import React, { useMemo } from "react";
 import { StyleSheet, Text, View, Dimensions, Image, Button, Linking } from "react-native";
 import { useSelector } from "react-redux";
 import { IPost } from "../../graphql/queries/getPosts";
@@ -8,7 +8,7 @@ import { IRootReducer } from "../../store/reducers";
 import { getAccessToken } from "../../store/selectors/auth.selectors";
 import NavigationSVG from "../../SVG/Navigation";
 import Avatar from "../Avatar";
-import BrandButton from "../BrandButton";
+import moment from "moment";
 
 const { width, height } = Dimensions.get("window");
 
@@ -17,9 +17,6 @@ interface PostsProps {
 }
 
 const Post : React.FC<PostsProps> = ({ post }) => {
-   const state = useSelector((state:IRootReducer) => state);
-   const token = getAccessToken(state);
-    console.log(token);
     const onClickWalk = () => {
         const coordinates = post.location?.coordinates; 
         if (!coordinates?.length) return;
@@ -27,13 +24,20 @@ const Post : React.FC<PostsProps> = ({ post }) => {
         Linking.openURL(`http://www.google.com/maps/place/${coordinates[0]},${coordinates[1]}`)
     };
 
+    const createdAt = useMemo(() => {
+        return moment(post.createdAt).fromNow();
+    }, [ post.createdAt ]);
+
     return (
         <View style={styles.container}>
            <View style={[ styles.contentContainer, { backgroundColor: "#111111"}]}>
                 <View style={styles.header}>
                     <View style={styles.meta}>
                         <Avatar size={15} iconSize={20}/>
-                        <Text style={styles.username}>{ post.user?.email }</Text>
+                        <View>
+                            <Text style={styles.username}>{ post.user?.email }</Text>
+                            <Text style={styles.createdAt}>{ createdAt} </Text>
+                        </View>
                     </View>
                     <FontAwesomeIcon color="#fff" icon={faEllipsis} />
                 </View>
@@ -76,6 +80,10 @@ const styles = StyleSheet.create({
         display: "flex",
         justifyContent: "center",
         alignItems: 'center',
+    },
+    createdAt: {
+        color: "grey",
+        marginLeft: 10,
     },
     contentContainer: {
         width: "100%",

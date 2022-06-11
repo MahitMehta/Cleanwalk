@@ -12,10 +12,22 @@ const { width, height } = Dimensions.get("window");
 const HomeScreen = ({ navigation } : any) => {
     const { palette } = useTheme();
 
+    const postCreate = () => {
+        navigation.navigate("postCreate");
+    };
+
     const { data:postsData, refetch:refetchPosts, loading } = useQuery(getPostsQuery(), { 
         fetchPolicy: "cache-first",
         variables: {}
     });
+
+    React.useEffect(() => {
+        const unsubscribe = navigation.addListener('focus', () => {
+           refetchPosts();
+        });
+    
+        return unsubscribe;
+      }, [navigation]);
 
     const posts = postsData?.getPosts || [];
 
@@ -23,7 +35,7 @@ const HomeScreen = ({ navigation } : any) => {
         navigation.setOptions({
             title: "",
             headerRight: () => (
-                <TouchableOpacity>
+                <TouchableOpacity onPress={postCreate}>
                     <FontAwesomeIcon size={25} color="#fff" icon={faPlus} />
                 </TouchableOpacity>
             ),
