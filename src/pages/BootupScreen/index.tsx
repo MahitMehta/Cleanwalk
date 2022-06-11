@@ -18,6 +18,10 @@ const BootupScreen : React.FC<BootupScreenProps> = ({ navigation }) => {
         navigation.navigate("signup");
     };
 
+    const handleLogin = () => {
+        navigation.navigate("login");
+    };
+
     return (
         <SafeAreaView style={styles.container}> 
             <ScrollView contentContainerStyle={styles.contentContainer}>
@@ -29,8 +33,9 @@ const BootupScreen : React.FC<BootupScreenProps> = ({ navigation }) => {
                 <View>
                     <BrandButton onPress={handleSignUp} style={styles.registerButton} title="Start Walking Today" />
                     <BrandButton 
+                        onPress={handleLogin}
                         style={[ styles.loginButton ]} 
-                        title="Restart Trash Walking"
+                        title="Restart Clean Walking"
                         color={palette.milkWhite}
                     />
                 </View>

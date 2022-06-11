@@ -1,10 +1,10 @@
 import React from "react";
 import { SafeAreaView, ScrollView, View, Text, StyleSheet, Dimensions } from "react-native";
 import { panGestureHandlerCustomNativeProps } from "react-native-gesture-handler/lib/typescript/handlers/PanGestureHandler";
-import InputField from "../../../components/InputField";
-import BrandButton from "../../../components/BrandButton";
+import InputField from "../../components/InputField";
+import BrandButton from "../../components/BrandButton";
 import { NavigationRouteContext } from "@react-navigation/native";
-import { useTheme } from "../../../hooks/useTheme";
+import { useTheme } from "../../hooks/useTheme";
 const { width, height } = Dimensions.get("window");
 
 interface SignupScreenProps {
@@ -19,6 +19,10 @@ const SignupScreen : React.FC<SignupScreenProps> = ({ navigation }) => {
     };
     const handleHomeScreen = () => {    
         navigation.navigate("home")
+    };
+
+    const handleSelectGeofield = () => {
+        navigation.navigate("signup-geolocation");
     };
     return (
         <SafeAreaView style={styles.container}> 
@@ -43,6 +47,7 @@ const SignupScreen : React.FC<SignupScreenProps> = ({ navigation }) => {
                     <BrandButton onPress={handleHomeScreen} style={styles.buttonContainer} title="Sign Up" />
                     <BrandButton onPress={handleLogin} style = {styles.alreadyContainer} title = "Already have an account? Log in" />
                     </View>
+                <BrandButton onPress={handleSelectGeofield} title="Select Geofield" />
             </ScrollView>
         </SafeAreaView>
     )
@@ -56,7 +61,6 @@ const styles = StyleSheet.create({
         backgroundColor: "#1F1F1F",
         height,
     },
-    
     contentContainer: {
         display: 'flex',
         alignItems: "center",
