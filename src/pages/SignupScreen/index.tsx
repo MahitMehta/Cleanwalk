@@ -1,11 +1,16 @@
 import React from "react";
 import { SafeAreaView, ScrollView, View, Text, StyleSheet, Dimensions } from "react-native";
 import { panGestureHandlerCustomNativeProps } from "react-native-gesture-handler/lib/typescript/handlers/PanGestureHandler";
-import InputField from "../../../components/InputField";
+import BrandButton from "../../components/BrandButton";
+import InputField from "../../components/InputField";
 
 const { width, height } = Dimensions.get("window");
 
-const SignupScreen = () => {
+const SignupScreen = ({ navigation } : any) => {
+    const handleSelectGeofield = () => {
+        navigation.navigate("signup-geolocation")
+    }
+
     return (
         <SafeAreaView style={styles.container}> 
             <ScrollView contentContainerStyle={styles.contentContainer}>
@@ -20,7 +25,7 @@ const SignupScreen = () => {
                         style = {styles.passContainer}
                     />
                 </View>
-
+                <BrandButton onPress={handleSelectGeofield} title="Select Geofield" />
             </ScrollView>
         </SafeAreaView>
     )
@@ -35,9 +40,7 @@ const styles = StyleSheet.create({
         height,
     },
     rectangle: {
-        height: 750,
         width: 330,
-        backgroundColor: "#6A994E",
         position: 'relative',
         padding: 8,
         borderRadius: 10,
