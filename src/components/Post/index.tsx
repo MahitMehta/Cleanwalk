@@ -9,6 +9,7 @@ import { getAccessToken } from "../../store/selectors/auth.selectors";
 import NavigationSVG from "../../SVG/Navigation";
 import Avatar from "../Avatar";
 import moment from "moment";
+import { faHeart as faHeartUnfilled} from "@fortawesome/free-regular-svg-icons";
 
 const { width, height } = Dimensions.get("window");
 
@@ -56,7 +57,16 @@ const Post : React.FC<PostsProps> = ({ post }) => {
                 }
                 <View style={styles.footer}>
                     <Text style={styles.description}>{ post.description }</Text>
-                    <Button onPress={onClickWalk} title="Begin Clean Walk" />
+                    <View style={{ display: "flex", flexDirection: "row", alignItems: 'center'}}>
+                        <Button onPress={onClickWalk} title="Begin Clean Walk" />
+                        {
+                            false ? (
+                                <FontAwesomeIcon color="red" icon={faHeart} />
+                            ) : (
+                                <FontAwesomeIcon color="grey" icon={faHeartUnfilled} />
+                            )
+                        }
+                    </View>
                 </View>
            </View>
         </View>
