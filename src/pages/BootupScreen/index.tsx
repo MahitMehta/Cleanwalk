@@ -7,8 +7,17 @@ import WalkingGirlSVG from "../../SVG/WalkingGirl";
 
 const { width, height } = Dimensions.get("window");
 
-const BootupScreen = () => {
+interface BootupScreenProps {
+    navigation: any,
+}
+
+const BootupScreen : React.FC<BootupScreenProps> = ({ navigation }) => {
     const { palette } = useTheme();
+
+    const handleSignUp = () => {
+        navigation.navigate("signup");
+    };
+
     return (
         <SafeAreaView style={styles.container}> 
             <ScrollView contentContainerStyle={styles.contentContainer}>
@@ -18,7 +27,7 @@ const BootupScreen = () => {
                     <WalkingGirlSVG width={width * 0.95} />
                 </View>
                 <View>
-                    <BrandButton style={styles.registerButton} title="Start Walking Today" />
+                    <BrandButton onPress={handleSignUp} style={styles.registerButton} title="Start Walking Today" />
                     <BrandButton 
                         style={[ styles.loginButton ]} 
                         title="Restart Trash Walking"
