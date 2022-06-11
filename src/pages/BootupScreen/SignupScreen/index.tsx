@@ -2,25 +2,47 @@ import React from "react";
 import { SafeAreaView, ScrollView, View, Text, StyleSheet, Dimensions } from "react-native";
 import { panGestureHandlerCustomNativeProps } from "react-native-gesture-handler/lib/typescript/handlers/PanGestureHandler";
 import InputField from "../../../components/InputField";
-
+import BrandButton from "../../../components/BrandButton";
+import { NavigationRouteContext } from "@react-navigation/native";
+import { useTheme } from "../../../hooks/useTheme";
 const { width, height } = Dimensions.get("window");
 
-const SignupScreen = () => {
+interface SignupScreenProps {
+    navigation: any,
+}
+
+const SignupScreen : React.FC<SignupScreenProps> = ({ navigation }) => {
+    const { palette } = useTheme();
+
+    const handleLogin = () => {    
+        navigation.navigate("login")
+    };
+    const handleHomeScreen = () => {    
+        navigation.navigate("home")
+    };
     return (
         <SafeAreaView style={styles.container}> 
             <ScrollView contentContainerStyle={styles.contentContainer}>
-                <View
-                    style = {styles.rectangle}>
                     <InputField 
-                        placeholder="Username"
+                        placeholder="First Name"
+                        style = {styles.firstContainer}
+                    />
+                    <InputField 
+                        placeholder="Last Name"
+                        style = {styles.lastContainer}
+                    />
+                    <InputField 
+                        placeholder="Userame"
                         style = {styles.userContainer}
                     />
                     <InputField 
                         placeholder="Password"
                         style = {styles.passContainer}
                     />
-                </View>
-
+                    <View>
+                    <BrandButton onPress={handleHomeScreen} style={styles.buttonContainer} title="Sign Up" />
+                    <BrandButton onPress={handleLogin} style = {styles.alreadyContainer} title = "Already have an account? Log in" />
+                    </View>
             </ScrollView>
         </SafeAreaView>
     )
@@ -34,22 +56,36 @@ const styles = StyleSheet.create({
         backgroundColor: "#1F1F1F",
         height,
     },
-    rectangle: {
-        height: 750,
-        width: 330,
-        backgroundColor: "#6A994E",
-        position: 'relative',
-        padding: 8,
-        borderRadius: 10,
-
-    },
+    
     contentContainer: {
         display: 'flex',
         alignItems: "center",
         width,
         height: height - 150,
         backgroundColor: "#1F1F1F",
-        justifyContent: "space-between",
+    },
+    firstContainer: {
+        zIndex: 1,
+        width: 312,
+        height: 55,
+        maxWidth: 500,
+        borderRadius: 10,
+        marginTop: 100,
+        marginVertical: 25,
+        elevation: 7.5,
+        backgroundColor: "#F2E8CF",
+        
+    },
+    lastContainer: {
+        zIndex: 1,
+        width: 312,
+        height: 55,
+        maxWidth: 500,
+        borderRadius: 10,
+        marginVertical: 25,
+        elevation: 7.5,
+        backgroundColor: "#F2E8CF",
+        
     },
     userContainer: {
         zIndex: 1,
@@ -57,11 +93,10 @@ const styles = StyleSheet.create({
         height: 55,
         maxWidth: 500,
         borderRadius: 10,
-        marginVertical: 5,
+        marginVertical: 25,
         elevation: 7.5,
         backgroundColor: "#F2E8CF",
-        justifyContent: "center",
-        alignItems: "center",
+        
     },
     passContainer: {
         zIndex: 1,
@@ -69,12 +104,32 @@ const styles = StyleSheet.create({
         height: 55,
         maxWidth: 500,
         borderRadius: 10,
-        marginVertical: 5,
+        marginVertical: 25,
         elevation: 7.5,
         backgroundColor: "#F2E8CF",
-        justifyContent: "center",
-        alignItems: "center",
+        
     },
+        buttonContainer: {
+            width: width * 0.9,
+            height: 55,
+            marginHorizontal: 10,
+            marginVertical: 25,
+            borderRadius: 5,
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+    },  alreadyContainer: {
+        width: width * 0.9,
+            height: 55,
+            marginHorizontal: 10,
+            marginVertical: 25,
+            borderRadius: 5,
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            backgroundColor: "transparent",
+    },
+    
         input: {
         width: "100%",
         height: "100%",
