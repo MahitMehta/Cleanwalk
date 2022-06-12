@@ -1,12 +1,14 @@
 import { useMutation } from "@apollo/client";
 import React, { useState } from "react";
-import { SafeAreaView, StyleSheet, Dimensions, View } from "react-native";
+import { SafeAreaView, StyleSheet, Dimensions, View, Button } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import BrandButton from "../../components/BrandButton";
 import InputField from "../../components/InputField";
 import { createPostMutation, ICreatePostDTO } from "../../graphql/mutations/createPost";
+import { isNaN } from "lodash";
+import Geolocation from "react-native-geolocation-service";
 
-const { width, height } = Dimensions.get("screen");
+const { width } = Dimensions.get("screen");
 
 const PostCreate = ({ navigation }: any) => {
     const [ formData, setFormData ] = useState<ICreatePostDTO>({});
@@ -19,7 +21,7 @@ const PostCreate = ({ navigation }: any) => {
         let val:any = e; 
 
         if (key === "latitude" || key === "longitude") {
-            val = parseFloat(e);
+            val = !isNaN(parseFloat(e)) ? parseFloat(e) : e;
         };
 
         setFormData({ ...formData, [ key ]: val })
@@ -29,25 +31,37 @@ const PostCreate = ({ navigation }: any) => {
         if (!formData.description || !formData.latitude || !formData.longitude) {
             return; 
         }
-        console.log(formData);
         createPost().then(() => {
             navigation.navigate("home");
         })
     };
+
+    const getCoordinates = async () => {
+        Geolocation.getCurrentPosition((pos) => {
+            setFormData({ ...formData, latitude: pos.coords.latitude, longitude: pos.coords.longitude });
+        }, (e) => {
+            console.log(e);
+        }, { enableHighAccuracy: true });
+    }
 
     return (
         <SafeAreaView>
             <ScrollView contentContainerStyle={styles.contentContainer}>
                 <View>
                     <InputField 
+                        value={formData.description}
                         onChangeText={updateFormData('description')}
                         placeholder="Description" 
                     />
+                    <Button onPress={getCoordinates} title="Get Current Coordinates"></Button>
                     <InputField 
-                        onChangeText={updateFormData('latitude')}
+                        keyboardType="numeric"
+                        value={formData.latitude?.toString()}   
+                        onChangeText={updateFormData('latitude') || ""}
                         placeholder="Latitude"  
                     />
                     <InputField 
+                        value={formData.longitude?.toString()}   
                         onChangeText={updateFormData('longitude')}
                         placeholder="Longitude"  
                     />

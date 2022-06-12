@@ -22,7 +22,7 @@ const Post : React.FC<PostsProps> = ({ post }) => {
         const coordinates = post.location?.coordinates; 
         if (!coordinates?.length) return;
 
-        Linking.openURL(`http://www.google.com/maps/place/${coordinates[0]},${coordinates[1]}`)
+        Linking.openURL(`http://www.google.com/maps/place/${coordinates[1]},${coordinates[0]}`)
     };
 
     const createdAt = useMemo(() => {
